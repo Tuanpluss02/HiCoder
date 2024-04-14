@@ -3,11 +3,13 @@ import 'package:ionicons/ionicons.dart';
 
 AppBar header(context) {
   return AppBar(
-    title: Text('Wooble'),
+    title: const Text('Hi Coder'),
     centerTitle: true,
-    actions: [Padding(
-      padding: const EdgeInsets.only(right:20.0),
-      child: Icon(Ionicons.notifications_outline),
-    )],
+    actions: const [
+      Padding(
+        padding: EdgeInsets.only(right: 20.0),
+        child: Icon(Ionicons.notifications_outline),
+      )
+    ],
   );
 }

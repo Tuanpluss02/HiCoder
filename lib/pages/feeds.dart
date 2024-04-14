@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hicoder/auth/login/login.dart';
+import 'package:hicoder/services/auth_service.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../models/post.dart';
@@ -63,6 +66,21 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
               //   ),
               // );
             },
+          ),
+          IconButton(
+            onPressed: () {
+              AuthService().logout();
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => const Login(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Ionicons.log_out,
+              size: 30.0,
+            ),
           ),
           const SizedBox(width: 20.0),
         ],
