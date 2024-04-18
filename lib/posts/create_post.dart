@@ -35,7 +35,7 @@ class _CreatePostState extends State<CreatePost> {
                 Navigator.pop(context);
               },
             ),
-            title: Text('WOOBLE'.toUpperCase()),
+            title: Text('HiCoder'.toUpperCase()),
             centerTitle: true,
             actions: [
               GestureDetector(
@@ -124,23 +124,6 @@ class _CreatePostState extends State<CreatePost> {
                               fit: BoxFit.cover,
                             ),
                 ),
-              ),
-              const SizedBox(height: 20.0),
-              Text(
-                'Title'.toUpperCase(),
-                style: const TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              TextFormField(
-                initialValue: viewModel.title,
-                decoration: const InputDecoration(
-                  hintText: 'Eg. Flutter is the best!',
-                  focusedBorder: UnderlineInputBorder(),
-                ),
-                maxLines: null,
-                onChanged: (val) => viewModel.setTitle(val),
               ),
               const SizedBox(height: 20.0),
               Text(

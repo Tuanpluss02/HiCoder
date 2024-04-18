@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
@@ -8,7 +7,7 @@ class CustomImage extends StatelessWidget {
   final double width;
   final BoxFit fit;
 
-  CustomImage({
+  const CustomImage({super.key, 
     this.imageUrl,
     this.height = 100.0,
     this.width = double.infinity,
@@ -20,7 +19,7 @@ class CustomImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl ?? '',
       errorWidget: (context, url, error) {
-        return Icon(Icons.error);
+        return const Icon(Icons.error);
       },
       height: height,
       fit: fit,

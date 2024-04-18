@@ -61,21 +61,21 @@ class Permissions {
       PermissionStatus storagePermissionStatus) {
     if (cameraPermissionStatus == PermissionStatus.denied &&
         microphonePermissionStatus == PermissionStatus.denied) {
-      throw new PlatformException(
+      throw PlatformException(
         code: "PERMISSION_DENIED",
         message: "Access to Camera and Microphone denied",
         details: "null",
       );
     } else if (cameraPermissionStatus == PermissionStatus.restricted &&
         microphonePermissionStatus == PermissionStatus.restricted) {
-      throw new PlatformException(
+      throw PlatformException(
         code: "PERMISSION_RESTRICTED",
         message: "Location data is not available on device",
         details: "null",
       );
     } else if (storagePermissionStatus == PermissionStatus.restricted &&
         storagePermissionStatus == PermissionStatus.restricted) {
-      throw new PlatformException(
+      throw PlatformException(
         code: "PERMISSION_RESTRICTED",
         message: "Storage permission is not allowed  on device",
         details: "null",

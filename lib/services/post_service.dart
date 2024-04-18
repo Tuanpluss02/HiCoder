@@ -4,11 +4,8 @@ import 'package:hicoder/services/api_service.dart';
 
 class PostService {
   Future<PostModel> createPost(
-      {required String title,
-      required String content,
-      String? mediaUrl}) async {
+      {required String content, String? mediaUrl}) async {
     Response response = await ApiService().createPost(
-      title: title,
       content: content,
       mediaUrl: mediaUrl,
     );

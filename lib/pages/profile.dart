@@ -33,7 +33,7 @@
 //     return Scaffold(
 //       appBar: AppBar(
 //         centerTitle: true,
-//         title: const Text('WOOBLE'),
+//         title: const Text('HiCoder'),
 //         actions: [
 //           widget.profileId == firebaseAuth.currentUser!.uid
 //               ? Center(

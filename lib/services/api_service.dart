@@ -67,7 +67,6 @@ class ApiService {
     String accessToken = await getToken(TokenType.access);
     dio.options.headers["Authorization"] = "Bearer $accessToken";
     Response response = await dio.post("/post", data: {
-      "title": title,
       "description": content,
       "mediaUrl": mediaUrl,
     });

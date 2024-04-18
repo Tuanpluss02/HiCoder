@@ -32,7 +32,6 @@ class PostsViewModel extends ChangeNotifier {
   Placemark? placemark;
   String? bio;
   String? content;
-  String? title;
   String? email;
   String? commentData;
   String? ownerId;
@@ -53,7 +52,6 @@ class PostsViewModel extends ChangeNotifier {
   }
 
   setPost(PostModel post) {
-    title = post.title;
     content = post.content;
     imgLink = post.mediaUrl;
     edit = true;
@@ -70,12 +68,6 @@ class PostsViewModel extends ChangeNotifier {
   setContent(String val) {
     debugPrint('setContent $val');
     content = val;
-    notifyListeners();
-  }
-
-  setTitle(String val) {
-    debugPrint('setContent $val');
-    title = val;
     notifyListeners();
   }
 
@@ -130,8 +122,7 @@ class PostsViewModel extends ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
-      await postService.createPost(
-          title: title!, content: content!, mediaUrl: mediaUrl!);
+      await postService.createPost(content: content!, mediaUrl: mediaUrl!);
       loading = false;
       resetPost();
       notifyListeners();
@@ -168,7 +159,6 @@ class PostsViewModel extends ChangeNotifier {
   resetPost() {
     mediaUrl = null;
     content = null;
-    title = null;
     edit = false;
     notifyListeners();
   }

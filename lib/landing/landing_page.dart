@@ -32,7 +32,7 @@ class _LandingState extends State<Landing> {
               ),
             ),
             const Text(
-              'WOOBLE',
+              'HiCoder',
               style: TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.w900,

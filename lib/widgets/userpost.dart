@@ -284,7 +284,7 @@ class UserPost extends StatelessWidget {
   //                             overflow: TextOverflow.ellipsis,
   //                           ),
   //                           Text(
-  //                             post?.content ?? 'Wooble',
+  //                             post?.content ?? 'HiCoder',
   //                             style: const TextStyle(
   //                               fontSize: 10.0,
   //                               color: Color(0xff4D4D4D),
