@@ -226,7 +226,7 @@
 //                               if (snapshot.hasData) {
 //                                 var snap = snapshot.data;
 //                                 List docs = snap!.docs;
-//                                 print(snapshot.data!.docs.toString());
+//                                 debugPrint(snapshot.data!.docs.toString());
 //                                 return docs.isEmpty
 //                                     ? Conversation(
 //                                         userId: doc.id,

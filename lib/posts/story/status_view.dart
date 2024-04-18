@@ -56,7 +56,7 @@
 //                       //then add our id to the list if it does not exist
 //                       List<dynamic>? allViewers = stats.viewers;
 //                       if (allViewers!.contains(firebaseAuth.currentUser!.uid)) {
-//                         print('ID ALREADY EXIST');
+//                         debugPrint('ID ALREADY EXIST');
 //                       } else {
 //                         allViewers.add(firebaseAuth.currentUser!.uid);
 //                         //update the viewCount for each status

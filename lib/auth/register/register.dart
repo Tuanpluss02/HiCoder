@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hicoder/components/password_text_field.dart';
 import 'package:hicoder/components/text_form_builder.dart';
 import 'package:hicoder/utils/validation.dart';
 import 'package:hicoder/view_models/auth/register_view_model.dart';
@@ -82,14 +81,23 @@ class _RegisterState extends State<Register> {
             nextFocusNode: viewModel.passFN,
           ),
           const SizedBox(height: 20.0),
-          PasswordFormBuilder(
+          TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Ionicons.lock_closed_outline,
-            suffix: Ionicons.eye_outline,
+            suffix: GestureDetector(
+              onTap: () => viewModel.toggleObscureText(),
+              child: Icon(
+                viewModel.obscureText
+                    ? Ionicons.eye_outline
+                    : Ionicons.eye_off_outline,
+                size: 15.0,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
             hintText: "Password",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validatePassword,
-            obscureText: true,
+            obscureText: viewModel.obscureText,
             onSaved: (String val) {
               viewModel.setPassword(val);
             },
@@ -97,14 +105,25 @@ class _RegisterState extends State<Register> {
             nextFocusNode: viewModel.cPassFN,
           ),
           const SizedBox(height: 20.0),
-          PasswordFormBuilder(
+          TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Ionicons.lock_open_outline,
+            suffix: GestureDetector(
+              onTap: () => viewModel.toggleObscureText(),
+              child: Icon(
+                viewModel.obscureText
+                    ? Ionicons.eye_outline
+                    : Ionicons.eye_off_outline,
+                size: 15.0,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
             hintText: "Confirm Password",
             textInputAction: TextInputAction.done,
-            validateFunction: Validations.validatePassword,
+            validateFunction: (String? val) =>
+                Validations.validateConfirmPassword(viewModel.password!, val!),
             submitAction: () => viewModel.register(context),
-            obscureText: true,
+            obscureText: viewModel.obscureText,
             onSaved: (String val) {
               viewModel.setConfirmPass(val);
             },

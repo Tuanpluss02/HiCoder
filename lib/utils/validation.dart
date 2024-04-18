@@ -24,4 +24,9 @@ class Validations {
     }
     return null;
   }
+
+  static String? validateConfirmPassword(String? pass, String? cPass) {
+    if (pass != cPass) return 'Passwords do not match.';
+    return null;
+  }
 }

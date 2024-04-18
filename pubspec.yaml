@@ -57,6 +57,7 @@ dependencies:
   story: ^1.1.0
   story_view: ^0.16.5
   dio: ^5.4.3+1
+  dio_smart_retry: ^6.0.0
   shared_preferences: ^2.2.3
 
 dev_dependencies:

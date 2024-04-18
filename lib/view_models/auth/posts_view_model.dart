@@ -126,11 +126,12 @@ class PostsViewModel extends ChangeNotifier {
       loading = false;
       resetPost();
       notifyListeners();
-    } catch (e) {
+      showInSnackBar('Uploaded successfully!', context);
+    } on Exception catch (e) {
       debugPrint(e.toString());
       loading = false;
       resetPost();
-      showInSnackBar('Uploaded successfully!', context);
+      showInSnackBar(e.toString().split(':')[1], context);
       notifyListeners();
     }
   }
@@ -142,15 +143,16 @@ class PostsViewModel extends ChangeNotifier {
       try {
         loading = true;
         notifyListeners();
-        await userService.updateAvatar(mediaUrl!);
+        await userService.updateAvatar(avatarUrl: mediaUrl!);
         loading = false;
         Navigator.of(context).pushReplacement(
             CupertinoPageRoute(builder: (_) => const TabScreen()));
         notifyListeners();
+        showInSnackBar('Uploaded successfully!', context);
       } catch (e) {
         debugPrint(e.toString());
         loading = false;
-        showInSnackBar('Uploaded successfully!', context);
+        showInSnackBar(e.toString().split(':')[1], context);
         notifyListeners();
       }
     }

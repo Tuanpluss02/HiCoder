@@ -10,7 +10,7 @@ class PostTile extends StatefulWidget {
   const PostTile({super.key, this.post});
 
   @override
-  _PostTileState createState() => _PostTileState();
+  State<PostTile> createState() => _PostTileState();
 }
 
 class _PostTileState extends State<PostTile> {

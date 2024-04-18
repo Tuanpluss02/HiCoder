@@ -346,7 +346,7 @@
 
 //     if (msg.isNotEmpty) {
 //       if (isFirst) {
-//         print("FIRST");
+//         debugPrint("FIRST");
 //         String id = await viewModel.sendFirstMessage(widget.userId, message);
 //         setState(() {
 //           isFirst = false;

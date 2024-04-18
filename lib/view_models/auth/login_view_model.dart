@@ -8,6 +8,7 @@ class LoginViewModel extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool validate = false;
   bool loading = false;
+  bool obscureText = true;
   String? email, password;
   FocusNode emailFN = FocusNode();
   FocusNode passFN = FocusNode();
@@ -25,20 +26,21 @@ class LoginViewModel extends ChangeNotifier {
       loading = true;
       notifyListeners();
       try {
-        bool success = await AuthService().loginUser(
+        await AuthService().loginUser(
           email: email!,
           password: password!,
         );
-        debugPrint(success.toString());
-        if (success) {
+        if (context.mounted) {
           Navigator.of(context).pushReplacement(
               CupertinoPageRoute(builder: (_) => const TabScreen()));
         }
-      } catch (e) {
+      } on Exception catch (e) {
         loading = false;
         notifyListeners();
         debugPrint(e.toString());
-        showInSnackBar(e.toString(), context);
+        if (context.mounted) {
+          showInSnackBar(e.toString().split(':')[1], context);
+        }
       }
       loading = false;
       notifyListeners();
@@ -47,6 +49,11 @@ class LoginViewModel extends ChangeNotifier {
 
   setEmail(val) {
     email = val;
+    notifyListeners();
+  }
+
+  toggleObscureText() {
+    obscureText = !obscureText;
     notifyListeners();
   }
 

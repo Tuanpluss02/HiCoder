@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 import 'api_service.dart';
 
 class UserService {
-  Future<void> updateAvatar(String avatarUrl) async {
-    try {
-      await ApiService().updateAvatar(avatarUrl: avatarUrl);
-    } catch (e) {
-      debugPrint(e.toString());
+  Future<void> updateAvatar({required String avatarUrl}) async {
+    Response response =
+        await ApiService().getDio.put("/user/update/avatar", data: {
+      "avatarUrl": avatarUrl,
+    });
+    if (response.statusCode != 200) {
+      throw Exception(response.data["message"]);
     }
   }
 }

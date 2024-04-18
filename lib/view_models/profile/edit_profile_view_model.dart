@@ -32,19 +32,19 @@
 //   }
 
 //   setCountry(String val) {
-//     print('SetCountry $val');
+//     debugPrint('SetCountry $val');
 //     country = val;
 //     notifyListeners();
 //   }
 
 //   setBio(String val) {
-//     print('SetBio$val');
+//     debugPrint('SetBio$val');
 //     bio = val;
 //     notifyListeners();
 //   }
 
 //   setUsername(String val) {
-//     print('SetUsername$val');
+//     debugPrint('SetUsername$val');
 //     username = val;
 //     notifyListeners();
 //   }
@@ -68,7 +68,7 @@
 //           bio: bio,
 //           country: country,
 //         );
-//         print(success);
+//         debugPrint(success);
 //         if (success) {
 //           clear();
 //           Navigator.pop(context);
@@ -76,7 +76,7 @@
 //       } catch (e) {
 //         loading = false;
 //         notifyListeners();
-//         print(e);
+//         debugPrint(e);
 //       }
 //       loading = false;
 //       notifyListeners();

@@ -1,5 +1,6 @@
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Permissions {
   static Future<bool> cameraMicrophoneAndStoragePermissionGranted() async {
@@ -26,7 +27,7 @@ class Permissions {
           await [Permission.camera].request();
       return statuses[Permission.camera] ?? PermissionStatus.limited;
     } else {
-      print('CAMERA STATUS $status');
+      debugPrint('CAMERA STATUS $status');
       return status;
     }
   }
@@ -38,7 +39,7 @@ class Permissions {
           await [Permission.microphone].request();
       return statuses[Permission.microphone] ?? PermissionStatus.limited;
     } else {
-      print('MICROPHONE STATUS $status');
+      debugPrint('MICROPHONE STATUS $status');
       return status;
     }
   }
@@ -50,7 +51,7 @@ class Permissions {
           await [Permission.storage].request();
       return statuses[Permission.storage] ?? PermissionStatus.limited;
     } else {
-      print('STORAGE STATUS $status');
+      debugPrint('STORAGE STATUS $status');
       return status;
     }
   }

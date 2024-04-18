@@ -8,7 +8,7 @@ class TextTime extends StatefulWidget {
   const TextTime({super.key, this.child});
 
   @override
-  _TextTimeState createState() => _TextTimeState();
+  State<TextTime> createState() => _TextTimeState();
 }
 
 class _TextTimeState extends State<TextTime> {

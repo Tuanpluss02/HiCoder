@@ -9,10 +9,10 @@ class RegisterViewModel extends ChangeNotifier {
   bool validate = false;
   bool loading = false;
   String? email, password, cPassword;
+  bool obscureText = true;
   FocusNode emailFN = FocusNode();
   FocusNode passFN = FocusNode();
   FocusNode cPassFN = FocusNode();
-  // AuthService auth = AuthService();
 
   register(BuildContext context) async {
     FormState form = formKey.currentState!;
@@ -22,35 +22,35 @@ class RegisterViewModel extends ChangeNotifier {
       notifyListeners();
       showInSnackBar(
           'Please fix the errors in red before submitting.', context);
-    } else {
-      if (password == cPassword) {
-        loading = true;
-        notifyListeners();
-        try {
-          bool success = await AuthService().createUser(
-            email: email!,
-            password: password!,
-          );
-          debugPrint(success.toString());
-          if (success) {
-            Navigator.of(context).pushReplacement(
-              CupertinoPageRoute(
-                builder: (_) => const ProfilePicture(),
-              ),
-            );
-          }
-        } catch (e) {
-          loading = false;
-          notifyListeners();
-          debugPrint(e.toString());
-          showInSnackBar(e.toString(), context);
-        }
-        loading = false;
-        notifyListeners();
-      } else {
-        showInSnackBar('The passwords does not match', context);
-      }
+      return;
     }
+    loading = true;
+    notifyListeners();
+    try {
+      await AuthService().createUser(
+        email: email!,
+        password: password!,
+      );
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          CupertinoPageRoute(
+            builder: (_) => const ProfilePicture(),
+          ),
+        );
+      }
+    } on Exception catch (e) {
+      loading = false;
+      notifyListeners();
+      debugPrint(e.toString());
+      if (context.mounted) showInSnackBar(e.toString().split(':')[1], context);
+    }
+    loading = false;
+    notifyListeners();
+  }
+
+  toggleObscureText() {
+    obscureText = !obscureText;
+    notifyListeners();
   }
 
   setEmail(val) {

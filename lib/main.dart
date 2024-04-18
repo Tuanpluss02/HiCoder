@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hicoder/landing/landing_page.dart';
 import 'package:hicoder/screens/mainscreen.dart';
@@ -34,6 +35,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
     return MultiProvider(
       providers: providers,
       child: Consumer<ThemeProvider>(
