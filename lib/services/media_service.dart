@@ -9,8 +9,8 @@ class MediaService {
     FormData formData = FormData.fromMap({
       "file": await MultipartFile.fromFile(file.path, filename: fileName),
     });
-    Response response =
-        await ApiService().getDio.post("/media/upload", data: formData);
+    Response response = await ApiService().getDio.post("/media/upload",
+        data: formData, options: Options(contentType: "multipart/form-data"));
     if (response.statusCode == 200) {
       return response.data["body"];
     } else {

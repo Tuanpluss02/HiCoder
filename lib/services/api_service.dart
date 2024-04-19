@@ -30,9 +30,10 @@ class ApiService {
       //   "/auth/reset-password",
       // ];
       // if (!noTokenPaths.contains(options.path)) {
+      options.headers["Content-Type"] = "application/json";
       String accessToken = await getToken(TokenType.access);
       if (accessToken != "") {
-        _dio.options.headers["Authorization"] = "Bearer $accessToken";
+        options.headers["Authorization"] = "Bearer $accessToken";
       }
       // }
       return handler.next(options);

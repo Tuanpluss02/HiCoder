@@ -6,8 +6,10 @@ import 'package:hicoder/components/custom_image.dart';
 import 'package:hicoder/models/post.dart';
 import 'package:hicoder/screens/view_image.dart';
 import 'package:hicoder/services/post_service.dart';
+import 'package:hicoder/view_models/auth/posts_view_model.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:like_button/like_button.dart';
+import 'package:provider/provider.dart';
 
 class UserPost extends StatelessWidget {
   final PostModel? post;
@@ -20,6 +22,7 @@ class UserPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PostsViewModel viewModel = Provider.of<PostsViewModel>(context);
     return CustomCard(
       onTap: () {},
       borderRadius: BorderRadius.circular(10.0),
@@ -40,19 +43,38 @@ class UserPost extends StatelessWidget {
           return Stack(
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0),
-                    ),
-                    child: CustomImage(
-                      imageUrl: post?.mediaUrl ?? '',
-                      height: 350.0,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                  Visibility(
+                    visible:
+                        post?.mediaUrl != null && post!.mediaUrl!.isNotEmpty,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0),
+                      ),
+                      child: CustomImage(
+                        imageUrl: post?.mediaUrl,
+                        height: 350.0,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0, top: 3.0),
+                    child: Text(
+                      textAlign: TextAlign.start,
+                      post?.content ?? "",
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodySmall!.color,
+                        fontSize: 15.0,
+                      ),
+                      maxLines: 2,
+                    ),
+                  ),
+                  const SizedBox(height: 3.0),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 3.0, vertical: 5.0),
@@ -109,25 +131,7 @@ class UserPost extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Visibility(
-                          visible: post!.content != null &&
-                              post!.content.toString().isNotEmpty,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5.0, top: 3.0),
-                            child: Text(
-                              post?.content ?? "",
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .color,
-                                fontSize: 15.0,
-                              ),
-                              maxLines: 2,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 3.0),
+
                         Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
@@ -166,8 +170,8 @@ class UserPost extends StatelessWidget {
           dotLastColor: Color(0xffff8c00)),
       likeBuilder: (bool isLiked) {
         return Icon(
-          post!.likesCount != 0 ? Ionicons.heart_outline : Ionicons.heart,
-          color: post!.likesCount != 0
+          post!.liked! ? Ionicons.heart : Ionicons.heart_outline,
+          color: !post!.liked!
               ? Theme.of(context).brightness == Brightness.dark
                   ? Colors.white
                   : Colors.black

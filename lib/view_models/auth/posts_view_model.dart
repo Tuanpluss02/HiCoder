@@ -4,8 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:hicoder/models/post.dart';
 import 'package:hicoder/services/post_service.dart';
 import 'package:hicoder/services/user_service.dart';
@@ -25,55 +23,13 @@ class PostsViewModel extends ChangeNotifier {
 
   //Variables
   bool loading = false;
-  String? username;
-  String? mediaUrl;
+  PostModel? post;
   final picker = ImagePicker();
-  Position? position;
-  Placemark? placemark;
-  String? bio;
-  String? content;
-  String? email;
-  String? commentData;
-  String? ownerId;
-  String? userId;
-  String? type;
-  File? userDp;
-  String? imgLink;
-  bool edit = false;
-  String? id;
 
-  //controllers
   TextEditingController locationTEC = TextEditingController();
 
-  //Setters
-  setEdit(bool val) {
-    edit = val;
-    notifyListeners();
-  }
-
   setPost(PostModel post) {
-    content = post.content;
-    imgLink = post.mediaUrl;
-    edit = true;
-    edit = false;
-    notifyListeners();
-  }
-
-  setUsername(String val) {
-    debugPrint('SetName $val');
-    username = val;
-    notifyListeners();
-  }
-
-  setContent(String val) {
-    debugPrint('setContent $val');
-    content = val;
-    notifyListeners();
-  }
-
-  setBio(String val) {
-    debugPrint('SetBio $val');
-    bio = val;
+    this.post = post;
     notifyListeners();
   }
 
@@ -108,7 +64,7 @@ class PostsViewModel extends ChangeNotifier {
       //   ],
       // );
       File mediaFile = File(pickedFile!.path);
-      mediaUrl = await MediaService().uploadMedia(mediaFile);
+      post!.mediaUrl = await MediaService().uploadMedia(mediaFile);
       loading = false;
       notifyListeners();
     } catch (e) {
@@ -122,7 +78,12 @@ class PostsViewModel extends ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
-      await postService.createPost(content: content!, mediaUrl: mediaUrl!);
+      if (post!.mediaUrl == null) {
+        await postService.createPost(content: post!.content!);
+      } else {
+        await postService.createPost(
+            content: post!.content!, mediaUrl: post!.mediaUrl!);
+      }
       loading = false;
       resetPost();
       notifyListeners();
@@ -137,13 +98,13 @@ class PostsViewModel extends ChangeNotifier {
   }
 
   uploadProfilePicture(BuildContext context) async {
-    if (mediaUrl == null) {
+    if (post!.mediaUrl == null) {
       showInSnackBar('Please select an image', context);
     } else {
       try {
         loading = true;
         notifyListeners();
-        await userService.updateAvatar(avatarUrl: mediaUrl!);
+        await userService.updateAvatar(avatarUrl: post!.mediaUrl!);
         loading = false;
         Navigator.of(context).pushReplacement(
             CupertinoPageRoute(builder: (_) => const TabScreen()));
@@ -159,14 +120,17 @@ class PostsViewModel extends ChangeNotifier {
   }
 
   resetPost() {
-    mediaUrl = null;
-    content = null;
-    edit = false;
+    post = PostModel();
     notifyListeners();
   }
 
   void showInSnackBar(String value, BuildContext context) {
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
+  }
+
+  setContent(String val) {
+    post!.content = val;
+    notifyListeners();
   }
 }

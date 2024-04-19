@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hicoder/components/custom_image.dart';
 import 'package:hicoder/view_models/auth/posts_view_model.dart';
 import 'package:hicoder/widgets/indicators.dart';
 import 'package:ionicons/ionicons.dart';
@@ -100,29 +99,21 @@ class _CreatePostState extends State<CreatePost> {
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-                  child: viewModel.imgLink != null
-                      ? CustomImage(
-                          imageUrl: viewModel.imgLink,
+                  child: viewModel.post!.mediaUrl == null
+                      ? Center(
+                          child: Text(
+                            'Upload a Photo',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        )
+                      : Image.network(
+                          viewModel.post!.mediaUrl!,
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.width - 30,
                           fit: BoxFit.cover,
-                        )
-                      : viewModel.mediaUrl == null
-                          ? Center(
-                              child: Text(
-                                'Upload a Photo',
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              viewModel.mediaUrl!,
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.width - 30,
-                              fit: BoxFit.cover,
-                            ),
+                        ),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -134,7 +125,7 @@ class _CreatePostState extends State<CreatePost> {
                 ),
               ),
               TextFormField(
-                initialValue: viewModel.content,
+                initialValue: viewModel.post!.content!,
                 decoration: const InputDecoration(
                   hintText: 'Eg. I love Flutter!',
                   focusedBorder: UnderlineInputBorder(),

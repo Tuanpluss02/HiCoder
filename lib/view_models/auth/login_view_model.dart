@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hicoder/screens/mainscreen.dart';
 import 'package:hicoder/services/auth_service.dart';
 
+import '../../widgets/snack_bar.dart';
+
 class LoginViewModel extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -60,10 +62,5 @@ class LoginViewModel extends ChangeNotifier {
   setPassword(val) {
     password = val;
     notifyListeners();
-  }
-
-  void showInSnackBar(String value, context) {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
   }
 }

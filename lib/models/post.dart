@@ -1,44 +1,48 @@
+import 'package:hicoder/models/user.dart';
+
 class PostModel {
   String? id;
-  String? title;
   String? content;
-  String? author;
+  UserModel? author;
   String? createdAt;
   String? mediaUrl;
   int? likesCount;
   int? commentsCount;
+  bool? liked;
 
   PostModel(
       {this.id,
-      this.title,
       this.content,
       this.author,
       this.createdAt,
       this.mediaUrl,
       this.likesCount,
-      this.commentsCount});
+      this.commentsCount,
+      this.liked});
 
   PostModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    title = json['title'];
     content = json['content'];
-    author = json['author'];
+    author = json['author'] != null ? UserModel.fromJson(json['author']) : null;
     createdAt = json['createdAt'];
     mediaUrl = json['mediaUrl'];
     likesCount = json['likesCount'];
     commentsCount = json['commentsCount'];
+    liked = json['liked'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['title'] = title;
     data['content'] = content;
-    data['author'] = author;
+    if (author != null) {
+      data['author'] = author!.toJson();
+    }
     data['createdAt'] = createdAt;
     data['mediaUrl'] = mediaUrl;
     data['likesCount'] = likesCount;
     data['commentsCount'] = commentsCount;
+    data['liked'] = liked;
     return data;
   }
 }
