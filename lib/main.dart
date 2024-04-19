@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hicoder/landing/landing_page.dart';
+import 'package:hicoder/auth/login/login.dart';
 import 'package:hicoder/screens/mainscreen.dart';
 import 'package:hicoder/services/auth_service.dart';
 import 'package:hicoder/utils/constants.dart';
@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
                   if (snapshot.data == true) {
                     return const TabScreen();
                   } else {
-                    return const Landing();
+                    return const Login();
                   }
                 } else {
                   return const Scaffold(

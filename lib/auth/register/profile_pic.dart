@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hicoder/view_models/auth/posts_view_model.dart';
+import 'package:hicoder/view_models/user/user_view_model.dart';
 import 'package:hicoder/widgets/indicators.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/user.dart';
+
 class ProfilePicture extends StatefulWidget {
-  const ProfilePicture({super.key});
+  final UserModel? user;
+  const ProfilePicture({super.key, this.user});
 
   @override
   State<ProfilePicture> createState() => _ProfilePictureState();
@@ -15,10 +18,11 @@ class ProfilePicture extends StatefulWidget {
 class _ProfilePictureState extends State<ProfilePicture> {
   @override
   Widget build(BuildContext context) {
-    PostsViewModel viewModel = Provider.of<PostsViewModel>(context);
+    UserViewModel viewModel = Provider.of<UserViewModel>(context);
+    viewModel.setUser(widget.user!);
     return PopScope(
       onPopInvoked: (x) async {
-        viewModel.resetPost();
+        // viewModel.resetPost();
         // return true;
       },
       child: LoadingOverlay(
@@ -27,7 +31,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
         child: Scaffold(
           key: viewModel.scaffoldKey,
           appBar: AppBar(
-            title: const Text('Add a profile picture'),
+            title: const Text('Tell us about yourself'),
             centerTitle: true,
             automaticallyImplyLeading: false,
           ),
@@ -48,17 +52,25 @@ class _ProfilePictureState extends State<ProfilePicture> {
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-                  child: viewModel.post!.mediaUrl == null
-                      ? Center(
-                          child: Text(
-                            'Tap to add your profile picture',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
+                  child: viewModel.user!.avatarUrl == null
+                      ? Stack(children: [
+                          Center(
+                            child: Text(
+                              'Tap to add your profile picture',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
                             ),
                           ),
-                        )
+                          Image.network(
+                            "http://api.stormx.space/files/cb3c6be6-1784-4ec6-a847-5d39919d9585",
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.width - 30,
+                            fit: BoxFit.cover,
+                          ),
+                        ])
                       : Image.network(
-                          viewModel.post!.mediaUrl!,
+                          viewModel.user!.avatarUrl!,
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.width - 30,
                           fit: BoxFit.cover,
@@ -84,7 +96,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
                     ),
                   ),
                   onPressed: () => {
-                    viewModel.uploadProfilePicture(context),
+                    viewModel.updateUser(context),
                   },
                 ),
               ),
@@ -95,7 +107,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
     );
   }
 
-  showImageChoices(BuildContext context, PostsViewModel viewModel) {
+  showImageChoices(BuildContext context, UserViewModel viewModel) {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -132,7 +144,6 @@ class _ProfilePictureState extends State<ProfilePicture> {
                 onTap: () {
                   Navigator.pop(context);
                   viewModel.pickImage(context: context);
-                  // viewModel.pickProfilePicture();
                 },
               ),
             ],

@@ -17,6 +17,9 @@ class UserModel {
       this.avatarUrl,
       this.about,
       this.birthday});
+  set mediaUrl(String? mediaUrl) {
+    avatarUrl = mediaUrl;
+  }
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

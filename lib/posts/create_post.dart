@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hicoder/view_models/auth/posts_view_model.dart';
+import 'package:hicoder/view_models/post/posts_view_model.dart';
 import 'package:hicoder/widgets/indicators.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:loading_overlay/loading_overlay.dart';
