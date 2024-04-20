@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/auth/register/register.dart';
 import 'package:hicoder/components/text_form_builder.dart';
@@ -69,7 +68,7 @@ class _LoginState extends State<Login> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                      CupertinoPageRoute(
+                      MaterialPageRoute(
                         builder: (_) => const Register(),
                       ),
                     );

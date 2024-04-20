@@ -43,7 +43,7 @@
 //                       onTap: () async {
 //                         await firebaseAuth.signOut();
 //                         Navigator.of(context).push(
-//                           CupertinoPageRoute(
+//                           MaterialPageRoute(
 //                             builder: (_) => const Register(),
 //                           ),
 //                         );
@@ -169,7 +169,7 @@
 //                                         ? InkWell(
 //                                             onTap: () {
 //                                               Navigator.of(context).push(
-//                                                 CupertinoPageRoute(
+//                                                 MaterialPageRoute(
 //                                                   builder: (_) =>
 //                                                       const Setting(),
 //                                                 ),
@@ -332,7 +332,7 @@
 //                               );
 //                               Navigator.push(
 //                                 context,
-//                                 CupertinoPageRoute(
+//                                 MaterialPageRoute(
 //                                   builder: (_) => ListPosts(
 //                                     userId: widget.profileId,
 //                                     username: currentUser.username,
@@ -388,7 +388,7 @@
 //           text: "Edit Profile",
 //           function: () {
 //             Navigator.of(context).push(
-//               CupertinoPageRoute(
+//               MaterialPageRoute(
 //                 builder: (_) => EditProfile(
 //                   user: user,
 //                 ),

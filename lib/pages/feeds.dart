@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/auth/login/login.dart';
 import 'package:hicoder/services/auth_service.dart';
@@ -64,7 +63,7 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
             onPressed: () {
               // Navigator.push(
               //   context,
-              //   CupertinoPageRoute(
+              //   MaterialPageRoute(
               //     builder: (_) => Chats(),
               //   ),
               // );
@@ -75,7 +74,7 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
               AuthService().logout();
               Navigator.push(
                 context,
-                CupertinoPageRoute(
+                MaterialPageRoute(
                   builder: (_) => const Login(),
                 ),
               );

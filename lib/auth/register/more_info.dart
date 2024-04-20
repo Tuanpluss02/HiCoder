@@ -1,5 +1,4 @@
 import 'package:date_picker_plus/date_picker_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/components/text_form_builder.dart';
 import 'package:hicoder/screens/mainscreen.dart';
@@ -184,7 +183,7 @@ class _MoreInfoState extends State<MoreInfo> {
                       if (context.mounted)
                         {
                           Navigator.of(context).pushReplacement(
-                            CupertinoPageRoute(
+                            MaterialPageRoute(
                               builder: (_) => const TabScreen(),
                             ),
                           )

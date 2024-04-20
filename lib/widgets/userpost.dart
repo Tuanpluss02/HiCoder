@@ -163,7 +163,7 @@ class UserPost extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           onTap: () {
             // Navigator.of(context).push(
-            //   CupertinoPageRoute(
+            //   MaterialPageRoute(
             //     builder: (_) => Comments(post: post),
             //   ),
             // );
