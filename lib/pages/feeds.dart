@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/auth/login/login.dart';
 import 'package:hicoder/services/auth_service.dart';
@@ -71,20 +72,31 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
           ),
           IconButton(
             onPressed: () {
-              AuthService().logout();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const Login(),
-                ),
-              );
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.scale,
+                title: 'Logout',
+                desc: 'Are you sure you want to logout?',
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  AuthService().logout();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const Login(),
+                    ),
+                  );
+                },
+              ).show();
             },
-            icon: const Icon(
+            icon: Icon(
               Ionicons.log_out,
               size: 30.0,
+              color: Colors.red.shade400,
             ),
           ),
-          const SizedBox(width: 20.0),
+          // const SizedBox(width: 20.0),
         ],
       ),
       body: RefreshIndicator(
