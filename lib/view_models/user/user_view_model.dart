@@ -9,12 +9,11 @@ import '../../services/user_service.dart';
 import '../../widgets/snack_bar.dart';
 
 class UserViewModel extends ChangeNotifier {
+  // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  // final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   UserService userService = UserService();
   MediaService mediaService = MediaService();
-
-  //Keys
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool loading = false;
   UserModel? user;
