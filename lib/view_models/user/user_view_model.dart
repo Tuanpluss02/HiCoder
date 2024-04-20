@@ -10,6 +10,7 @@ import '../../widgets/snack_bar.dart';
 
 class UserViewModel extends ChangeNotifier {
   UserService userService = UserService();
+  MediaService mediaService = MediaService();
 
   //Keys
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -18,9 +19,28 @@ class UserViewModel extends ChangeNotifier {
   bool loading = false;
   UserModel? user;
   final picker = ImagePicker();
+  String? fullName;
+  String? avatarUrl;
+  String? dateOfBirth;
+  String about = "";
 
   setUser(UserModel user) {
     this.user = user;
+    notifyListeners();
+  }
+
+  setFullName(String fullName) {
+    this.fullName = fullName;
+    notifyListeners();
+  }
+
+  setAbout(String about) {
+    this.about = about;
+    notifyListeners();
+  }
+
+  setDateOfBirth(String dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
     notifyListeners();
   }
 
@@ -32,13 +52,19 @@ class UserViewModel extends ChangeNotifier {
           source: camera ? ImageSource.camera : ImageSource.gallery,
           imageQuality: 50);
       File mediaFile = File(pickedFile!.path);
-      user!.mediaUrl = await MediaService().uploadMedia(mediaFile);
+      UserModel loadedUser = await userService.getCurrentUser();
+      avatarUrl = await mediaService.uploadMedia(mediaFile);
+      loadedUser.avatarUrl = avatarUrl;
+      user = loadedUser;
       loading = false;
       notifyListeners();
     } catch (e) {
+      debugPrint(e.toString());
       loading = false;
       notifyListeners();
-      if (context.mounted) showInSnackBar('Cancelled', context);
+      if (context.mounted) {
+        showInSnackBar('Upload avatar failed, please try again', context);
+      }
     }
   }
 

@@ -19,7 +19,7 @@ class UserService {
     if (response.statusCode != 200) {
       throw Exception(response.data["message"]);
     }
-    return UserModel.fromJson(response.data["data"]);
+    return UserModel.fromJson(response.data["body"]);
   }
 
   Future<void> updateProfile({required UserModel user}) async {

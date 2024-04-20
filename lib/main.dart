@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hicoder/auth/login/login.dart';
-import 'package:hicoder/screens/mainscreen.dart';
-import 'package:hicoder/services/auth_service.dart';
 import 'package:hicoder/utils/constants.dart';
 import 'package:hicoder/utils/providers.dart';
 import 'package:hicoder/view_models/theme/theme_view_model.dart';
 import 'package:provider/provider.dart';
+
+import 'auth/login/login.dart';
+import 'screens/mainscreen.dart';
+import 'services/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
             theme: themeData(
               notifier.dark ? Constants.darkTheme : Constants.lightTheme,
             ),
+            // home: const MoreInfo(),
             home: FutureBuilder(
               future: AuthService().isLoggedIn(),
               builder: ((BuildContext context, snapshot) {

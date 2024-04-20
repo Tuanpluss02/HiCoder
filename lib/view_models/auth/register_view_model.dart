@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hicoder/auth/register/profile_pic.dart';
-import 'package:hicoder/models/user.dart';
+import 'package:hicoder/auth/register/more_info.dart';
 import 'package:hicoder/services/auth_service.dart';
-import 'package:hicoder/services/user_service.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -33,13 +31,10 @@ class RegisterViewModel extends ChangeNotifier {
         email: email!,
         password: password!,
       );
-      UserModel user = await UserService().getCurrentUser();
       if (context.mounted) {
         Navigator.of(context).pushReplacement(
           CupertinoPageRoute(
-            builder: (_) => ProfilePicture(
-              user: user,
-            ),
+            builder: (_) => const MoreInfo(),
           ),
         );
       }

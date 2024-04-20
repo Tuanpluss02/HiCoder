@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hicoder/components/custom_card.dart';
 
 class TextFormBuilder extends StatefulWidget {
   final String? initialValue;
@@ -49,69 +48,64 @@ class _TextFormBuilderState extends State<TextFormBuilder> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomCard(
-            onTap: () {
-              debugPrint('clicked');
-            },
-            borderRadius: BorderRadius.circular(40.0),
-            child: Theme(
-              data: ThemeData(
-                primaryColor: Theme.of(context).colorScheme.secondary,
-                colorScheme: ColorScheme.fromSwatch().copyWith(
-                    secondary: Theme.of(context).colorScheme.secondary),
+          Theme(
+            data: ThemeData(
+              primaryColor: Theme.of(context).colorScheme.secondary,
+              colorScheme: ColorScheme.fromSwatch()
+                  .copyWith(secondary: Theme.of(context).colorScheme.secondary),
+            ),
+            child: TextFormField(
+              cursorColor: Theme.of(context).colorScheme.secondary,
+              textCapitalization: TextCapitalization.none,
+              initialValue: widget.initialValue,
+              enabled: widget.enabled,
+              onChanged: (val) {
+                if (widget.validateFunction != null) {
+                  error = widget.validateFunction!(val);
+                }
+                widget.onSaved!(val);
+              },
+              style: const TextStyle(
+                fontSize: 15.0,
               ),
-              child: TextFormField(
-                cursorColor: Theme.of(context).colorScheme.secondary,
-                textCapitalization: TextCapitalization.none,
-                initialValue: widget.initialValue,
-                enabled: widget.enabled,
-                onChanged: (val) {
-                  error = widget.validateFunction!(val);
-                  setState(() {});
-                  widget.onSaved!(val);
-                },
-                style: const TextStyle(
-                  fontSize: 15.0,
+              key: widget.key,
+              controller: widget.controller,
+              obscureText: widget.obscureText,
+              keyboardType: widget.textInputType,
+              validator: widget.validateFunction,
+              onSaved: (val) {
+                error = widget.validateFunction!(val) ?? "";
+                setState(() {});
+                widget.onSaved!(val!);
+              },
+              textInputAction: widget.textInputAction,
+              focusNode: widget.focusNode,
+              onFieldSubmitted: (String term) {
+                if (widget.nextFocusNode != null) {
+                  widget.focusNode!.unfocus();
+                  FocusScope.of(context).requestFocus(widget.nextFocusNode);
+                } else {
+                  widget.submitAction!();
+                }
+              },
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  widget.prefix,
+                  size: 15.0,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
-                key: widget.key,
-                controller: widget.controller,
-                obscureText: widget.obscureText,
-                keyboardType: widget.textInputType,
-                validator: widget.validateFunction,
-                onSaved: (val) {
-                  error = widget.validateFunction!(val);
-                  setState(() {});
-                  widget.onSaved!(val!);
-                },
-                textInputAction: widget.textInputAction,
-                focusNode: widget.focusNode,
-                onFieldSubmitted: (String term) {
-                  if (widget.nextFocusNode != null) {
-                    widget.focusNode!.unfocus();
-                    FocusScope.of(context).requestFocus(widget.nextFocusNode);
-                  } else {
-                    widget.submitAction!();
-                  }
-                },
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    widget.prefix,
-                    size: 15.0,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  suffixIcon: widget.suffix,
-                  // fillColor: Colors.white,
-                  filled: true,
-                  hintText: widget.hintText,
-                  hintStyle: TextStyle(
-                    color: Colors.grey[400],
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  border: border(context),
-                  enabledBorder: border(context),
-                  focusedBorder: focusBorder(context),
-                  errorStyle: const TextStyle(height: 0.0, fontSize: 0.0),
+                suffixIcon: widget.suffix,
+                // fillColor: Colors.white,
+                filled: true,
+                hintText: widget.hintText,
+                hintStyle: TextStyle(
+                  color: Colors.grey[400],
                 ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+                border: border(context),
+                enabledBorder: border(context),
+                focusedBorder: focusBorder(context),
+                errorStyle: const TextStyle(height: 0.0, fontSize: 0.0),
               ),
             ),
           ),
