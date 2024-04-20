@@ -33,7 +33,7 @@ class LoginViewModel extends ChangeNotifier {
         );
         if (context.mounted) {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => const TabScreen()));
+              MaterialPageRoute(builder: (_) => const HomeScreen()));
         }
       } on Exception catch (e) {
         loading = false;
@@ -62,6 +62,4 @@ class LoginViewModel extends ChangeNotifier {
     password = val;
     notifyListeners();
   }
-
-  forgotPassword(BuildContext context) {}
 }

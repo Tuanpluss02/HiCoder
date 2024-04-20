@@ -40,7 +40,7 @@ class _MoreInfoState extends State<MoreInfo> {
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (_) => const TabScreen(),
+                          builder: (_) => const HomeScreen(),
                         ),
                       );
                     },
@@ -226,7 +226,7 @@ class _MoreInfoState extends State<MoreInfo> {
     if (context.mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => const TabScreen(),
+          builder: (_) => const HomeScreen(),
         ),
       );
     }
