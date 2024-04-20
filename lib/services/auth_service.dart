@@ -52,4 +52,13 @@ class AuthService {
     await removeToken(TokenType.refresh);
     await ApiService().getDio.post("/auth/logout");
   }
+
+  Future<void> forgotPassword({required String email}) async {
+    Response response = await ApiService()
+        .getDio
+        .post("/auth/reset-password", data: {"email": email});
+    if (response.statusCode != 200) {
+      throw Exception(response.data['message']);
+    }
+  }
 }
