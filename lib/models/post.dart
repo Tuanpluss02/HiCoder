@@ -31,6 +31,13 @@ class PostModel {
     liked = json['liked'];
   }
 
+  int get getLikesCount => likesCount!;
+  int get getCommentsCount => commentsCount!;
+  bool get getLiked => liked!;
+  set setLiked(bool value) => liked = value;
+  set setLikesCount(int value) => likesCount = value;
+  set setCommentsCount(int value) => commentsCount = value;
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

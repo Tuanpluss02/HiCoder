@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hicoder/auth/register/profile_pic.dart';
+import 'package:hicoder/auth/register/more_info.dart';
 import 'package:hicoder/services/auth_service.dart';
 
 class RegisterViewModel extends ChangeNotifier {
@@ -33,8 +32,8 @@ class RegisterViewModel extends ChangeNotifier {
       );
       if (context.mounted) {
         Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(
-            builder: (_) => const ProfilePicture(),
+          MaterialPageRoute(
+            builder: (_) => const MoreInfo(),
           ),
         );
       }

@@ -210,7 +210,7 @@
 //                     onTap: () {
 //                       Navigator.push(
 //                         context,
-//                         CupertinoPageRoute(
+//                         MaterialPageRoute(
 //                           builder: (_) => StreamBuilder(
 //                             stream: chatIdRef
 //                                 .where(
@@ -285,7 +285,7 @@
 //   showProfile(BuildContext context, {String? profileId}) {
 //     Navigator.push(
 //       context,
-//       CupertinoPageRoute(
+//       MaterialPageRoute(
 //         builder: (_) => Profile(profileId: profileId),
 //       ),
 //     );

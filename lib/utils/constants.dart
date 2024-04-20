@@ -17,6 +17,9 @@ class Constants {
   static Color darkBG = const Color(0xff2B2B2B);
 
   static ThemeData lightTheme = ThemeData(
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
     primaryColor: lightPrimary,
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: lightAccent,
@@ -49,6 +52,9 @@ class Constants {
   );
 
   static ThemeData darkTheme = ThemeData(
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
     iconTheme: const IconThemeData(color: Colors.white),
     primaryColor: darkPrimary,
     scaffoldBackgroundColor: darkBG,

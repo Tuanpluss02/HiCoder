@@ -280,7 +280,7 @@
 //             ),
 //             onTap: () {
 //               Navigator.of(context).push(
-//                 CupertinoPageRoute(
+//                 MaterialPageRoute(
 //                   builder: (_) => Profile(profileId: user.id),
 //                 ),
 //               );

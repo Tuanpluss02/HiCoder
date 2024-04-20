@@ -37,7 +37,7 @@
 //               onTap: () {
 //                 Navigator.push(
 //                     context,
-//                     CupertinoPageRoute(
+//                     MaterialPageRoute(
 //                       builder: (_) =>
 //                           Profile(profileId: widget.activity!.userId),
 //                     ));

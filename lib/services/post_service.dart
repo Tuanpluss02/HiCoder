@@ -28,4 +28,11 @@ class PostService {
       throw Exception(response.data["message"]);
     }
   }
+
+  Future<void> likePostToggle({required String postId}) async {
+    Response response = await ApiService().getDio.post("/post/$postId/like");
+    if (response.statusCode != 200) {
+      throw Exception(response.data["message"]);
+    }
+  }
 }

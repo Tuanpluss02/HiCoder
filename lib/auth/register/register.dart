@@ -121,7 +121,7 @@ class _RegisterState extends State<Register> {
             hintText: "Confirm Password",
             textInputAction: TextInputAction.done,
             validateFunction: (String? val) =>
-                Validations.validateConfirmPassword(viewModel.password!, val!),
+                Validations.validateConfirmPassword(viewModel.password, val),
             submitAction: () => viewModel.register(context),
             obscureText: viewModel.obscureText,
             onSaved: (String val) {

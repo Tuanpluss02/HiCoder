@@ -74,7 +74,7 @@
 //       mediaUrl = File(pickedFile!.path);
 //       loading = false;
 //       Navigator.of(context!).push(
-//         CupertinoPageRoute(
+//         MaterialPageRoute(
 //           builder: (_) => const ConfirmStatus(),
 //         ),
 //       );
