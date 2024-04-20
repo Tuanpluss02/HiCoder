@@ -75,7 +75,7 @@ class _TextFormBuilderState extends State<TextFormBuilder> {
               validator: widget.validateFunction,
               onSaved: (val) {
                 error = widget.validateFunction!(val) ?? "";
-                setState(() {});
+                // setState(() {});
                 widget.onSaved!(val!);
               },
               textInputAction: widget.textInputAction,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/auth/register/register.dart';
 import 'package:hicoder/components/text_form_builder.dart';
@@ -25,7 +26,6 @@ class _LoginState extends State<Login> {
       progressIndicator: circularProgress(context),
       isLoading: viewModel.loading,
       child: Scaffold(
-        backgroundColor: Colors.white,
         key: viewModel.scaffoldKey,
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
+                      CupertinoPageRoute(
                         builder: (_) => const Register(),
                       ),
                     );
@@ -122,11 +122,11 @@ class _LoginState extends State<Login> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
             ),
+            obscureText: viewModel.obscureText,
             hintText: "Password",
             textInputAction: TextInputAction.done,
             validateFunction: Validations.validatePassword,
             submitAction: () => viewModel.login(context),
-            obscureText: true,
             onSaved: (String val) {
               viewModel.setPassword(val);
             },
@@ -139,7 +139,7 @@ class _LoginState extends State<Login> {
               child: InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                       builder: (_) => const ForgotPasswordPage(),
                     ),
                   );
