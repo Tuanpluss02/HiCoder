@@ -62,4 +62,6 @@ class LoginViewModel extends ChangeNotifier {
     password = val;
     notifyListeners();
   }
+
+  forgotPassword(BuildContext context) {}
 }
