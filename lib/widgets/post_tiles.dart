@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hicoder/models/post.dart';
-import 'package:hicoder/screens/view_image.dart';
+import 'package:hicoder/screens/post_detail.dart';
 import 'package:hicoder/widgets/cached_image.dart';
 
 class PostTile extends StatefulWidget {
@@ -18,7 +18,7 @@ class _PostTileState extends State<PostTile> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => ViewImage(post: widget.post),
+          builder: (_) => PostDetail(post: widget.post),
         ));
       },
       child: SizedBox(

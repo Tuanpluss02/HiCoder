@@ -1,15 +1,16 @@
-
 // import 'package:flutter/material.dart';
-
+//
+// import '../models/user.dart';
+//
 // class Profile extends StatefulWidget {
 //   final profileId;
-
+//
 //   const Profile({super.key, this.profileId});
-
+//
 //   @override
 //   State<Profile> createState() => _ProfileState();
 // }
-
+//
 // class _ProfileState extends State<Profile> {
 //   User? user;
 //   bool isLoading = false;
@@ -20,14 +21,13 @@
 //   UserModel? users;
 //   final DateTime timestamp = DateTime.now();
 //   ScrollController controller = ScrollController();
-
-
+//
 //   @override
 //   void initState() {
 //     super.initState();
 //     checkIfFollowing();
 //   }
-
+//
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -35,30 +35,29 @@
 //         centerTitle: true,
 //         title: const Text('HiCoder'),
 //         actions: [
-//           widget.profileId == firebaseAuth.currentUser!.uid
-//               ? Center(
-//                   child: Padding(
-//                     padding: const EdgeInsets.only(right: 25.0),
-//                     child: GestureDetector(
-//                       onTap: () async {
-//                         await firebaseAuth.signOut();
-//                         Navigator.of(context).push(
-//                           MaterialPageRoute(
-//                             builder: (_) => const Register(),
-//                           ),
-//                         );
-//                       },
-//                       child: const Text(
-//                         'Log Out',
-//                         style: TextStyle(
-//                           fontWeight: FontWeight.w900,
-//                           fontSize: 15.0,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 )
-//               : const SizedBox()
+//           // widget.profileId == firebaseAuth.currentUser!.uid
+//           //     ? Center(
+//           //         child: Padding(
+//           //           padding: const EdgeInsets.only(right: 25.0),
+//           //           child: GestureDetector(
+//           //             onTap: () async {
+//           //               // Navigator.of(context).push(
+//           //               //   MaterialPageRoute(
+//           //               //     builder: (_) => const Register(),
+//           //               //   ),
+//           //               // );
+//           //             },
+//           //             child: const Text(
+//           //               'Log Out',
+//           //               style: TextStyle(
+//           //                 fontWeight: FontWeight.w900,
+//           //                 fontSize: 15.0,
+//           //               ),
+//           //             ),
+//           //           ),
+//           //         ),
+//           //       )
+//           //     : const SizedBox()
 //         ],
 //       ),
 //       body: CustomScrollView(
@@ -355,7 +354,7 @@
 //       ),
 //     );
 //   }
-
+//
 //   buildCount(String label, int count) {
 //     return Column(
 //       children: <Widget>[
@@ -379,7 +378,7 @@
 //       ],
 //     );
 //   }
-
+//
 //   buildProfileButton(user) {
 //     //if isMe then display "edit profile"
 //     bool isMe = widget.profileId == firebaseAuth.currentUser!.uid;
@@ -409,7 +408,7 @@
 //       );
 //     }
 //   }
-
+//
 //   buildButton({String? text, Function()? function}) {
 //     return Center(
 //       child: GestureDetector(
@@ -438,7 +437,7 @@
 //       ),
 //     );
 //   }
-
+//
 //   handleUnfollow() async {
 //     DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
 //     users = UserModel.fromJson(doc.data() as Map<String, dynamic>);
@@ -479,7 +478,7 @@
 //       }
 //     });
 //   }
-
+//
 //   handleFollow() async {
 //     DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
 //     users = UserModel.fromJson(doc.data() as Map<String, dynamic>);
@@ -512,11 +511,11 @@
 //       "timestamp": timestamp,
 //     });
 //   }
-
+//
 //   buildPostView() {
 //     return buildGridPost();
 //   }
-
+//
 //   buildGridPost() {
 //     return StreamGridWrapper(
 //       shrinkWrap: true,
@@ -535,7 +534,7 @@
 //       },
 //     );
 //   }
-
+//
 //   buildLikeButton() {
 //     return StreamBuilder(
 //       stream: favUsersRef

@@ -61,6 +61,10 @@ dependencies:
   timeago: ^3.6.1
   date_picker_plus: ^3.0.2
   awesome_dialog: ^3.2.0
+  firebase_core: ^2.30.0
+  firebase_messaging: ^14.8.2
+  flutter_local_notifications: ^17.0.1
+  firebase_analytics: ^10.10.2
 
 dev_dependencies:
   flutter_test:
