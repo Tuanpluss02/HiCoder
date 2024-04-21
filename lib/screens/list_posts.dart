@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:hicoder/models/post.dart';
 // import 'package:hicoder/widgets/indicators.dart';
-// import 'package:hicoder/widgets/userpost.dart';
+// import 'package:hicoder/widgets/feed_post.dart';
 // import 'package:ionicons/ionicons.dart';
 
 // class ListPosts extends StatefulWidget {
