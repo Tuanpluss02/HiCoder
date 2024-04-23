@@ -10,10 +10,10 @@ import 'package:hicoder/utils/providers.dart';
 import 'package:hicoder/view_models/theme/theme_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'auth/login/login.dart';
-import 'auth/register/more_info.dart';
 import 'firebase_options.dart';
 import 'services/auth_service.dart';
+import 'views/auth/login/login.dart';
+import 'views/auth/register/more_info.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

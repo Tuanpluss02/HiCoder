@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../services/media_service.dart';
 import '../../services/user_service.dart';
-import '../../widgets/snack_bar.dart';
+import '../../views/components/snack_bar.dart';
 
 class UserViewModel extends ChangeNotifier {
   // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
