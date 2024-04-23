@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/components/text_form_builder.dart';
@@ -56,7 +57,8 @@ class _MoreInfoState extends State<MoreInfo> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * .5,
@@ -88,11 +90,10 @@ class _MoreInfoState extends State<MoreInfo> {
                               ],
                             ),
                           )
-                        : ClipOval(
-                            child: Image.network(
-                              viewModel.avatarUrl!,
-                              fit: BoxFit.cover,
-                            ),
+                        : CircleAvatar(
+                            radius: 15.0,
+                            backgroundImage: CachedNetworkImageProvider(
+                                viewModel.avatarUrl!),
                           ),
                   ),
                 ),
@@ -124,8 +125,7 @@ class _MoreInfoState extends State<MoreInfo> {
                     onTap: () async {
                       final DateTime? picked = await showDatePickerDialog(
                         splashColor: Theme.of(context).colorScheme.secondary,
-                        highlightColor:
-                            Theme.of(context).colorScheme.secondary,
+                        highlightColor: Theme.of(context).colorScheme.secondary,
                         slidersColor: Theme.of(context).colorScheme.secondary,
                         leadingDateTextStyle: const TextStyle(
                           color: Colors.black,
@@ -142,8 +142,7 @@ class _MoreInfoState extends State<MoreInfo> {
                           color: Theme.of(context).colorScheme.secondary,
                           border: Border.fromBorderSide(
                             BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.secondary),
+                                color: Theme.of(context).colorScheme.secondary),
                           ),
                         ),
                         initialPickerType: PickerType.days,
@@ -156,8 +155,7 @@ class _MoreInfoState extends State<MoreInfo> {
                         centerLeadingDate: true,
                       );
                       if (picked != null) {
-                        dobController.text =
-                            picked.toString().split(" ").first;
+                        dobController.text = picked.toString().split(" ").first;
                       }
                     },
                     child: const Icon(Ionicons.calendar_outline),
@@ -165,7 +163,7 @@ class _MoreInfoState extends State<MoreInfo> {
                   textInputAction: TextInputAction.next,
                   validateFunction: Validations.validateDate,
                   onSaved: (String val) {
-                    viewModel.setDateOfBirth(val);
+                    viewModel.setDateOfBirth(dobController.text);
                   },
                 ),
                 const SizedBox(height: 15.0),
@@ -174,6 +172,12 @@ class _MoreInfoState extends State<MoreInfo> {
                   prefix: Ionicons.pencil_outline,
                   hintText: "About You",
                   textInputAction: TextInputAction.next,
+                  validateFunction: (String? val) {
+                    if (val!.isEmpty) {
+                      return 'About must be at least 5 characters';
+                    }
+                    return null;
+                  },
                   onSaved: (String val) {
                     viewModel.setAbout(val);
                   },
@@ -184,8 +188,7 @@ class _MoreInfoState extends State<MoreInfo> {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).colorScheme.secondary),
-                      shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0),
                         ),
@@ -219,13 +222,17 @@ class _MoreInfoState extends State<MoreInfo> {
           'Please fix the errors in red before submitting.', context);
       return;
     }
-    viewModel.updateUser(context);
-    if (context.mounted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
-        ),
-      );
+    try {
+      viewModel.updateUser(context);
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => const HomeScreen(),
+          ),
+        );
+      }
+    } on Exception catch (e) {
+      showInSnackBar(e.toString().split(":").last, context);
     }
   }
 
