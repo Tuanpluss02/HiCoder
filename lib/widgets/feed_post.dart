@@ -12,6 +12,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/constants.dart';
 import 'time_ago.dart';
 
 class FeedPost extends StatelessWidget {
@@ -81,8 +82,7 @@ class FeedPost extends StatelessWidget {
                     // const Spacer(),
                     Row(
                       children: [
-                        buildLikeWidget(
-                            context: context, viewModel: viewModel),
+                        buildLikeWidget(context: context, viewModel: viewModel),
                         const SizedBox(width: 10.0),
                         buildConmmentWidget(
                             context: context, viewModel: viewModel),
@@ -194,8 +194,8 @@ class FeedPost extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 15.0,
-              backgroundImage: CachedNetworkImageProvider(user.avatarUrl ??
-                  "http://api.stormx.space/files/cb3c6be6-1784-4ec6-a847-5d39919d9585"),
+              backgroundImage: CachedNetworkImageProvider(
+                  user.avatarUrl ?? Constants.defaultAvatar),
             ),
             const SizedBox(width: 7.0),
             Column(

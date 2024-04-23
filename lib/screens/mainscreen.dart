@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hicoder/pages/profile.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../components/fab_container.dart';
@@ -46,8 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'title': 'Profile',
       'icon': CupertinoIcons.person_fill,
-      // 'page': Profile(),
-      'page': const Feeds(),
+      'page': const UserProfile(),
       'index': 4,
     },
   ];

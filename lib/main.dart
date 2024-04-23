@@ -11,8 +11,8 @@ import 'package:hicoder/view_models/theme/theme_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'auth/login/login.dart';
+import 'auth/register/more_info.dart';
 import 'firebase_options.dart';
-import 'screens/mainscreen.dart';
 import 'services/auth_service.dart';
 
 @pragma('vm:entry-point')
@@ -22,7 +22,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   showFlutterNotification(message);
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  print('Handling a background message ${message.messageId}');
+  debugPrint('Handling a background message ${message.messageId}');
 }
 
 /// Create a [AndroidNotificationChannel] for heads up notifications
@@ -148,7 +148,8 @@ class _MyAppState extends State<MyApp> {
               builder: ((BuildContext context, snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data == true) {
-                    return const HomeScreen();
+                    // return const HomeScreen();
+                    return const MoreInfo();
                   } else {
                     return const Login();
                   }
