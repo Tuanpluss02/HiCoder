@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:hicoder/view_models/theme/theme_view_model.dart';
+import 'package:provider/provider.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
 
   @override
-  _SettingState createState() => _SettingState();
+  State<Setting> createState() => _SettingState();
 }
 
 class _SettingState extends State<Setting> {

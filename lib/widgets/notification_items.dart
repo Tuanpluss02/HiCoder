@@ -32,7 +32,7 @@
 //         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
 //         onTap: () {
 //           Navigator.of(context).push(
-//             CupertinoPageRoute(
+//             MaterialPageRoute(
 //               builder: (_) => widget.activity!.type == "follow"
 //                   ? Profile(profileId: widget.activity!.userId)
 //                   : ViewActivityDetails(activity: widget.activity!),

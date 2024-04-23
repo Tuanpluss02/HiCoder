@@ -1,7 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/auth/login/login.dart';
 import 'package:hicoder/services/auth_service.dart';
+import 'package:hicoder/widgets/snack_bar.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../models/post.dart';
@@ -61,7 +64,7 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
             onPressed: () {
               // Navigator.push(
               //   context,
-              //   CupertinoPageRoute(
+              //   MaterialPageRoute(
               //     builder: (_) => Chats(),
               //   ),
               // );
@@ -69,20 +72,31 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
           ),
           IconButton(
             onPressed: () {
-              AuthService().logout();
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (_) => const Login(),
-                ),
-              );
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.scale,
+                title: 'Logout',
+                desc: 'Are you sure you want to logout?',
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  AuthService().logout();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const Login(),
+                    ),
+                  );
+                },
+              ).show();
             },
-            icon: const Icon(
+            icon: Icon(
               Ionicons.log_out,
               size: 30.0,
+              color: Colors.red.shade400,
             ),
           ),
-          const SizedBox(width: 20.0),
+          // const SizedBox(width: 20.0),
         ],
       ),
       body: RefreshIndicator(
@@ -105,7 +119,7 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
               SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: FutureBuilder(
-                  future: PostService().fetchPosts(),
+                  future: fetchPosts(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       var snap = snapshot.data;
@@ -159,4 +173,14 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
 
   @override
   bool get wantKeepAlive => true;
+
+  Future<List<PostModel>> fetchPosts() async {
+    try {
+      return await PostService().fetchPosts();
+    } on Exception catch (e) {
+      log(e.toString());
+      if (context.mounted) showInSnackBar(e.toString(), context);
+      return [];
+    }
+  }
 }

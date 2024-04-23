@@ -79,7 +79,7 @@ class FabContainer extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(
-                    CupertinoPageRoute(
+                    MaterialPageRoute(
                       builder: (_) => const CreatePost(),
                     ),
                   );

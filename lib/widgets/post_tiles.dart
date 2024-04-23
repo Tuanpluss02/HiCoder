@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hicoder/models/post.dart';
 import 'package:hicoder/screens/view_image.dart';
@@ -10,7 +9,7 @@ class PostTile extends StatefulWidget {
   const PostTile({super.key, this.post});
 
   @override
-  _PostTileState createState() => _PostTileState();
+  State<PostTile> createState() => _PostTileState();
 }
 
 class _PostTileState extends State<PostTile> {
@@ -18,7 +17,7 @@ class _PostTileState extends State<PostTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(CupertinoPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => ViewImage(post: widget.post),
         ));
       },

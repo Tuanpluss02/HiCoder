@@ -6,14 +6,14 @@ import 'package:ionicons/ionicons.dart';
 import '../components/fab_container.dart';
 import '../pages/feeds.dart';
 
-class TabScreen extends StatefulWidget {
-  const TabScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<TabScreen> createState() => _TabScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _page = 0;
 
   List pages = [

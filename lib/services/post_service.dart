@@ -5,10 +5,10 @@ import 'package:hicoder/services/api_service.dart';
 class PostService {
   Future<PostModel> createPost(
       {required String content, String? mediaUrl}) async {
-    Response response = await ApiService().createPost(
-      content: content,
-      mediaUrl: mediaUrl,
-    );
+    Response response = await ApiService().getDio.post("/post", data: {
+      "content": content,
+      "mediaUrl": mediaUrl,
+    });
     if (response.statusCode == 200) {
       return PostModel.fromJson(response.data["body"]);
     } else {
@@ -17,7 +17,7 @@ class PostService {
   }
 
   Future<List<PostModel>> fetchPosts() async {
-    Response response = await ApiService().fetchPosts();
+    Response response = await ApiService().getDio.get("/post/newsfeed");
     if (response.statusCode == 200) {
       List<PostModel> posts = [];
       response.data["body"].forEach((post) {
@@ -25,6 +25,13 @@ class PostService {
       });
       return posts;
     } else {
+      throw Exception(response.data["message"]);
+    }
+  }
+
+  Future<void> likePostToggle({required String postId}) async {
+    Response response = await ApiService().getDio.post("/post/$postId/like");
+    if (response.statusCode != 200) {
       throw Exception(response.data["message"]);
     }
   }

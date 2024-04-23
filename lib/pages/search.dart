@@ -210,7 +210,7 @@
 //                     onTap: () {
 //                       Navigator.push(
 //                         context,
-//                         CupertinoPageRoute(
+//                         MaterialPageRoute(
 //                           builder: (_) => StreamBuilder(
 //                             stream: chatIdRef
 //                                 .where(
@@ -226,7 +226,7 @@
 //                               if (snapshot.hasData) {
 //                                 var snap = snapshot.data;
 //                                 List docs = snap!.docs;
-//                                 print(snapshot.data!.docs.toString());
+//                                 debugPrint(snapshot.data!.docs.toString());
 //                                 return docs.isEmpty
 //                                     ? Conversation(
 //                                         userId: doc.id,
@@ -285,7 +285,7 @@
 //   showProfile(BuildContext context, {String? profileId}) {
 //     Navigator.push(
 //       context,
-//       CupertinoPageRoute(
+//       MaterialPageRoute(
 //         builder: (_) => Profile(profileId: profileId),
 //       ),
 //     );

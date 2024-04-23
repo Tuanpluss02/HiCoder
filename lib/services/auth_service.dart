@@ -1,59 +1,41 @@
+import 'package:dio/dio.dart';
 import 'package:hicoder/services/api_service.dart';
 
-import '../models/authentication.dart';
 import '../utils/shared_pref.dart';
 
 class AuthService {
-  Future<bool> createUser(
+  Future<void> createUser(
       {required String email,
       required String password,
       String? role,
       String? adminKey}) async {
-    try {
-      final responseData = await ApiService().registerUser(
-          authentication: Authentication(
-              email: email,
-              password: password,
-              role: role,
-              adminKey: adminKey));
-      String accessToken = responseData.data['body']['access_token'];
-      String refreshToken = responseData.data['body']['refresh_token'];
-      setToken(accessToken, TokenType.access);
-      setToken(refreshToken, TokenType.refresh);
-      return true;
-    } catch (e) {
-      return false;
+    Response response = await ApiService().getDio.post("/auth/register", data: {
+      "email": email,
+      "password": password,
+      "role": role,
+      "adminKey": adminKey,
+    });
+    if (response.statusCode != 200) {
+      throw Exception(response.data['message']);
     }
+    String accessToken = response.data['body']['access_token'];
+    String refreshToken = response.data['body']['refresh_token'];
+    setToken(accessToken, TokenType.access);
+    setToken(refreshToken, TokenType.refresh);
   }
 
-//this will save the details inputted by the user to firestore.
-  // saveUserToFirestore(
-  //     String name, User user, String email, String country) async {
-  //   await usersRef.doc(user.uid).set({
-  //     'username': name,
-  //     'email': email,
-  //     'time': Timestamp.now(),
-  //     'id': user.uid,
-  //     'bio': "",
-  //     'country': country,
-  //     'photoUrl': user.photoURL ?? '',
-  //     'gender': '',
-  //   });
-  // }
-
-  Future<bool> loginUser(
+  Future<void> loginUser(
       {required String email, required String password}) async {
-    try {
-      final responseData = await ApiService().loginUser(
-          authentication: Authentication(email: email, password: password));
-      String accessToken = responseData.data['body']['access_token'];
-      String refreshToken = responseData.data['body']['refresh_token'];
-      setToken(accessToken, TokenType.access);
-      setToken(refreshToken, TokenType.refresh);
-      return true;
-    } catch (e) {
-      return false;
+    Response response = await ApiService()
+        .getDio
+        .post("/auth/login", data: {"email": email, "password": password});
+    if (response.statusCode != 200) {
+      throw Exception(response.data['message']);
     }
+    String accessToken = response.data['body']['access_token'];
+    String refreshToken = response.data['body']['refresh_token'];
+    setToken(accessToken, TokenType.access);
+    setToken(refreshToken, TokenType.refresh);
   }
 
   Future<bool> isLoggedIn() async {
@@ -68,5 +50,15 @@ class AuthService {
   Future<void> logout() async {
     await removeToken(TokenType.access);
     await removeToken(TokenType.refresh);
+    await ApiService().getDio.post("/auth/logout");
+  }
+
+  Future<void> forgotPassword({required String email}) async {
+    Response response = await ApiService()
+        .getDio
+        .post("/auth/reset-password", data: {"email": email});
+    if (response.statusCode != 200) {
+      throw Exception(response.data['message']);
+    }
   }
 }

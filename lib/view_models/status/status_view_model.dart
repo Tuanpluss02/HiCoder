@@ -35,7 +35,7 @@
 //   int pageIndex = 0;
 
 //   setContent(String val) {
-//     // print('setContent $val');
+//     // debugPrint('setContent $val');
 //     description = val;
 //     notifyListeners();
 //   }
@@ -74,7 +74,7 @@
 //       mediaUrl = File(pickedFile!.path);
 //       loading = false;
 //       Navigator.of(context!).push(
-//         CupertinoPageRoute(
+//         MaterialPageRoute(
 //           builder: (_) => const ConfirmStatus(),
 //         ),
 //       );
