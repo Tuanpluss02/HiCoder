@@ -19,7 +19,7 @@ class Validations {
   }
 
   static String? validateDate(String? value, [bool isRequried = true]) {
-    if (value!.isEmpty) return null;
+    if (value!.isEmpty) return "You must enter a date.";
     // yyyy-mm-dd
     final RegExp nameExp =
         RegExp(r'^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$');

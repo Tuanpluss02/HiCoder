@@ -74,8 +74,9 @@ class _TextFormBuilderState extends State<TextFormBuilder> {
               keyboardType: widget.textInputType,
               validator: widget.validateFunction,
               onSaved: (val) {
-                error = widget.validateFunction!(val) ?? "";
-                // setState(() {});
+                if (widget.validateFunction != null) {
+                  error = widget.validateFunction!(val);
+                }
                 widget.onSaved!(val!);
               },
               textInputAction: widget.textInputAction,
@@ -84,7 +85,7 @@ class _TextFormBuilderState extends State<TextFormBuilder> {
                 if (widget.nextFocusNode != null) {
                   widget.focusNode!.unfocus();
                   FocusScope.of(context).requestFocus(widget.nextFocusNode);
-                } else {
+                } else if (widget.submitAction != null) {
                   widget.submitAction!();
                 }
               },

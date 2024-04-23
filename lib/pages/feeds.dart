@@ -10,8 +10,8 @@ import 'package:ionicons/ionicons.dart';
 import '../models/post.dart';
 import '../services/post_service.dart';
 import '../utils/constants.dart';
+import '../widgets/feed_post.dart';
 import '../widgets/indicators.dart';
-import '../widgets/userpost.dart';
 
 class Feeds extends StatefulWidget {
   const Feeds({super.key});
@@ -107,7 +107,6 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
           });
           return Future.value();
         },
-        //     postRef.orderBy('timestamp', descending: true).limit(page).get(),
         child: SingleChildScrollView(
           controller: scrollController,
           physics: const NeverScrollableScrollPhysics(),
@@ -142,7 +141,7 @@ class _FeedsState extends State<Feeds> with AutomaticKeepAliveClientMixin {
                             PostModel posts = snap[index];
                             return Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: UserPost(post: posts),
+                              child: FeedPost(post: posts),
                             );
                           },
                         );

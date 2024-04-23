@@ -22,12 +22,16 @@ class UserService {
     return UserModel.fromJson(response.data["body"]);
   }
 
-  Future<void> updateProfile({required UserModel user}) async {
+  Future<void> updateProfile(
+      {required String displayName,
+      required String avatarUrl,
+      required String birthday,
+      required String about}) async {
     Response response = await ApiService().getDio.put("/user/update", data: {
-      "displayName": user.displayName,
-      "avatarUrl": user.avatarUrl,
-      "birthday": user.birthday,
-      "about": user.about,
+      "displayName": displayName,
+      "avatarUrl": avatarUrl,
+      "birthday": birthday,
+      "about": about,
     });
     if (response.statusCode != 200) {
       throw Exception(response.data["message"]);

@@ -6,18 +6,19 @@ import 'package:hicoder/components/custom_card.dart';
 import 'package:hicoder/components/custom_image.dart';
 import 'package:hicoder/models/post.dart';
 import 'package:hicoder/models/user.dart';
-import 'package:hicoder/screens/view_image.dart';
+import 'package:hicoder/screens/post_detail.dart';
 import 'package:hicoder/view_models/post/posts_view_model.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/constants.dart';
 import 'time_ago.dart';
 
-class UserPost extends StatelessWidget {
+class FeedPost extends StatelessWidget {
   final PostModel? post;
 
-  const UserPost({super.key, this.post});
+  const FeedPost({super.key, this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class UserPost extends StatelessWidget {
       child: OpenContainer(
         transitionType: ContainerTransitionType.fadeThrough,
         openBuilder: (BuildContext context, VoidCallback _) {
-          return ViewImage(post: post);
+          return PostDetail(post: post);
         },
         closedElevation: 0.0,
         closedShape: const RoundedRectangleBorder(
@@ -75,20 +76,17 @@ class UserPost extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     buildUserWithTime(context: context, user: post!.author!),
                     // const Spacer(),
-                    Flexible(
-                      child: Row(
-                        children: [
-                          buildLikeWidget(
-                              context: context, viewModel: viewModel),
-                          const SizedBox(width: 10.0),
-                          buildConmmentWidget(
-                              context: context, viewModel: viewModel),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        buildLikeWidget(context: context, viewModel: viewModel),
+                        const SizedBox(width: 10.0),
+                        buildConmmentWidget(
+                            context: context, viewModel: viewModel),
+                      ],
                     ),
                   ],
                 ),
@@ -196,8 +194,8 @@ class UserPost extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 15.0,
-              backgroundImage: CachedNetworkImageProvider(user.avatarUrl ??
-                  "http://api.stormx.space/files/cb3c6be6-1784-4ec6-a847-5d39919d9585"),
+              backgroundImage: CachedNetworkImageProvider(
+                  user.avatarUrl ?? Constants.defaultAvatar),
             ),
             const SizedBox(width: 7.0),
             Column(
