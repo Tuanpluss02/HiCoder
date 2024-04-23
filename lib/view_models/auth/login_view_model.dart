@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hicoder/screens/mainscreen.dart';
 import 'package:hicoder/services/auth_service.dart';
+import 'package:hicoder/views/mainscreen.dart';
 
-import '../../widgets/snack_bar.dart';
+import '../../views/components/snack_bar.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();

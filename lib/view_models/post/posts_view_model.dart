@@ -7,7 +7,7 @@ import 'package:hicoder/services/user_service.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../services/media_service.dart';
-import '../../widgets/snack_bar.dart';
+import '../../views/components/snack_bar.dart';
 
 class PostsViewModel extends ChangeNotifier {
   //Services

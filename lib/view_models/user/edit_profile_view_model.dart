@@ -5,7 +5,7 @@ import 'package:hicoder/models/user.dart';
 import 'package:hicoder/services/user_service.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../widgets/snack_bar.dart';
+import '../../views/components/snack_bar.dart';
 
 class EditProfileViewModel extends ChangeNotifier {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
