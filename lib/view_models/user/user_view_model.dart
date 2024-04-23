@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../services/media_service.dart';
 import '../../services/user_service.dart';
-import '../../widgets/snack_bar.dart';
+import '../../views/components/snack_bar.dart';
 
 class UserViewModel extends ChangeNotifier {
   // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -21,7 +21,7 @@ class UserViewModel extends ChangeNotifier {
   String? fullName;
   String? avatarUrl;
   String? dateOfBirth;
-  String about = "";
+  String? about;
 
   setUser(UserModel user) {
     this.user = user;
@@ -71,7 +71,11 @@ class UserViewModel extends ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
-      await userService.updateProfile(user: user!);
+      await userService.updateProfile(
+          displayName: fullName!,
+          avatarUrl: avatarUrl!,
+          birthday: dateOfBirth!,
+          about: about!);
       loading = false;
       notifyListeners();
       if (context.mounted) {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122438329124",
+    "project_id": "hi-coder",
+    "storage_bucket": "hi-coder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122438329124:android:114d473d21688c179d09b1",
+        "android_client_info": {
+          "package_name": "com.stormx.hicoder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYUWs5lRM8LR9zibUD_bUxE7uzmP5sj4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

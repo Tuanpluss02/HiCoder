@@ -20,6 +20,8 @@ class AuthService {
     }
     String accessToken = response.data['body']['access_token'];
     String refreshToken = response.data['body']['refresh_token'];
+    String userId = response.data['body']['user_id'];
+    setUserId(userId);
     setToken(accessToken, TokenType.access);
     setToken(refreshToken, TokenType.refresh);
   }
@@ -34,6 +36,8 @@ class AuthService {
     }
     String accessToken = response.data['body']['access_token'];
     String refreshToken = response.data['body']['refresh_token'];
+    String userId = response.data['body']['user_id'];
+    setUserId(userId);
     setToken(accessToken, TokenType.access);
     setToken(refreshToken, TokenType.refresh);
   }

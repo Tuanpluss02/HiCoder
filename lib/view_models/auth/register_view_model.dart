@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hicoder/auth/register/more_info.dart';
 import 'package:hicoder/services/auth_service.dart';
+import 'package:hicoder/views/auth/register/more_info.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
