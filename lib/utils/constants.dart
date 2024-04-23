@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class Constants {
   //App related strings
   static String appName = "HiCoder";
-
+  static String defaultAvatar =
+      "http://api.stormx.space/files/cb3c6be6-1784-4ec6-a847-5d39919d9585";
   //Colors for theme
   static Color lightPrimary = const Color(0xfff3f4f9);
   static Color darkPrimary = const Color(0xff2B2B2B);
